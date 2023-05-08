@@ -43,6 +43,7 @@ class DefaultFirebaseOptions {
     }
   }
 
+  //TODO add a description
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyD97XIKx1GndTJwkanOTMHQJ1_FVc-T8Pw',
     appId: '1:936383223494:web:a58c82b78dc57dbd76e9c7',
@@ -67,7 +68,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '936383223494',
     projectId: 'fffw-web',
     storageBucket: 'fffw-web.appspot.com',
-    iosClientId: '936383223494-3ttlqj2bb2s01gkfumtfj0f8cmj59kl8.apps.googleusercontent.com',
+    iosClientId:
+        '936383223494-3ttlqj2bb2s01gkfumtfj0f8cmj59kl8.apps.googleusercontent.com',
     iosBundleId: 'com.example.emptyApp',
   );
 
@@ -77,7 +79,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '936383223494',
     projectId: 'fffw-web',
     storageBucket: 'fffw-web.appspot.com',
-    iosClientId: '936383223494-3ttlqj2bb2s01gkfumtfj0f8cmj59kl8.apps.googleusercontent.com',
+    iosClientId:
+        '936383223494-3ttlqj2bb2s01gkfumtfj0f8cmj59kl8.apps.googleusercontent.com',
     iosBundleId: 'com.example.emptyApp',
   );
 }
