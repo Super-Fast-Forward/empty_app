@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:providers/firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'firebase_options.dart';
 
 // ignore: constant_identifier_names
@@ -44,24 +45,12 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   void _incrementCounter() async {
-    //TODO add a description
-    int count = await kDB.collection(COLLECTION_NAME).doc("counter").get().then(
-          (doc) => doc["count"] ?? 0,
-        );
-    await kDB.collection(COLLECTION_NAME).doc("counter").set({
-      "count": ++count,
+    // it reaches the Firestore and increments the counter
+    await kDB.collection(COLLECTION_NAME).doc("counter").update({
+      "count": FieldValue.increment(1),
     });
   }
 
@@ -80,19 +69,20 @@ class MyHomePage extends ConsumerWidget {
         title: Text(title),
       ),
       body: Center(
-        //TODO add a description
+        // Retrieves data from Firestore. When the data changes, this widget is rebuilt based on the new data.
         child: ref.watch(docSP("$COLLECTION_NAME/counter")).when(
           data: (data) {
+            // This widget will return if data is successfully retrieved
             return Text(
               'This button has been pressed ${data["count"]} times in total since it created.',
             );
           },
-          //TODO add a description
           error: (error, stackTrace) {
+            // This widget returns if data has errors
             return Text(error.toString());
           },
-          //TODO add a description
           loading: () {
+            // This widget returns while the data is loading
             return const CircularProgressIndicator.adaptive();
           },
         ),
